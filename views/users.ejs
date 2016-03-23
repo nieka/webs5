@@ -1,0 +1,136 @@
+<html>
+<head>
+    <title>User overzicht</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src='https://cdn.socket.io/socket.io-1.4.5.js'></script>
+    <script src="/javascripts/user.js"></script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+            <table id="userslist" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Acties</th>
+                </tr>
+                </thead>
+                <tbody id="userlistTbody">
+
+                </tbody>
+            </table>
+
+        </div>
+        <div id="usercrud" class="col-md-2">
+            <p>
+                <h2>User details</h2>
+                <strong>Name: </strong> <span id='userInfoName'></span>
+                <br>
+                <strong>Woonplaats:</strong> <span id='userInfoWoonplaats'></span>
+                <br>
+                <strong>Email:</strong> <span id='userInfoEmail'></span>
+            </p>
+            <p id="adduser">
+                <h2 id="userformtitle">Add user</h2>
+                <form>
+                    <table>
+                        <tr>
+                            <td>
+                                <strong>Firstname: </strong>
+                            </td>
+                            <td>
+                                <input id="inputFirstname" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Lastname: </strong>
+                            </td>
+                            <td>
+                                <input id="inputLastname" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Woonplaats: </strong>
+                            </td>
+                            <td>
+                                <input id="inputWoonplaats" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Email: </strong>
+                            </td>
+                            <td>
+                                <input id="inputEmail" type="email">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><button id="submitUser">Add User</button></td>
+                            <td></td>
+                        </tr>
+                    </table>
+
+                </form>
+            </p>
+            <p id="edituser">
+            <h2 >Edit user</h2>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <strong>Firstname: </strong>
+                        </td>
+                        <td>
+                            <input id="inputeditFirstname" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Lastname: </strong>
+                        </td>
+                        <td>
+                            <input id="inputeditLastname" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Woonplaats: </strong>
+                        </td>
+                        <td>
+                            <input id="inputeditWoonplaats" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Email: </strong>
+                        </td>
+                        <td>
+                            <input id="inputeditEmail" type="email">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><button id="editUser">Edit User</button></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+            </form>
+            </p>
+        </div>
+    </div>
+</body>
+
+
+</html>

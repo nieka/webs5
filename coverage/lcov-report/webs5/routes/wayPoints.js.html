@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for webs5\routes\wayPoints.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">webs5/routes/</a> wayPoints.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40.38% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>21/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.29% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">42% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>21/50</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var express = require('express');
+var router = express();
+var wayPoint;
+var race;
+var user;
+var socket = require("../socket/socket")(null);
+var _ = require('underscore');
+var handleError;
+var async = require('async');
+&nbsp;
+<span class="fstat-no" title="function not covered" >function getWayPoint(req, res){</span>
+    //todo zorgen dat de informatie van het cafe uit google places async ingeladen word
+<span class="cstat-no" title="statement not covered" >    var query = {};</span>
+<span class="cstat-no" title="statement not covered" >    if(req.params.id){</span>
+<span class="cstat-no" title="statement not covered" >        query._id = req.params.id.toLowerCase();</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var result = wayPoint.find(query);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    result.exec(<span class="fstat-no" title="function not covered" >function(err, data){</span></span>
+<span class="cstat-no" title="statement not covered" >        if(err){ <span class="cstat-no" title="statement not covered" >return handleError(req, res, 500, err); </span>}</span>
+&nbsp;
+        // We hebben gezocht op id, dus we gaan geen array teruggeven.
+<span class="cstat-no" title="statement not covered" >        if(req.params.id){</span>
+<span class="cstat-no" title="statement not covered" >            data = data[0];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        res.json(data);</span>
+    });
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function tagWaypoint (req, res){</span>
+<span class="cstat-no" title="statement not covered" >    var query = {};</span>
+<span class="cstat-no" title="statement not covered" >    query._id = req.body._id;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var result = user.find(query);</span>
+<span class="cstat-no" title="statement not covered" >    result.exec(<span class="fstat-no" title="function not covered" >function(err, data){</span></span>
+<span class="cstat-no" title="statement not covered" >        if(data){</span>
+<span class="cstat-no" title="statement not covered" >            result = wayPoint.find({_id : req.params.id});</span>
+<span class="cstat-no" title="statement not covered" >            result.exec(<span class="fstat-no" title="function not covered" >function(err, data){</span></span>
+<span class="cstat-no" title="statement not covered" >                if(data){</span>
+<span class="cstat-no" title="statement not covered" >                    var tagdUsers = data[0].gemeldeUsers;</span>
+<span class="cstat-no" title="statement not covered" >                    tagdUsers.push(req.body._id);</span>
+<span class="cstat-no" title="statement not covered" >                    console.log("user id= " + data[0]._id);</span>
+<span class="cstat-no" title="statement not covered" >                    query = {"_id" : data[0]._id};</span>
+<span class="cstat-no" title="statement not covered" >                    var options = { multi: true };</span>
+<span class="cstat-no" title="statement not covered" >                    wayPoint.update(query, { $set: { gemeldeUsers: tagdUsers }}, options, <span class="fstat-no" title="function not covered" >function(err, numAffected){</span></span>
+<span class="cstat-no" title="statement not covered" >                        if(err){ <span class="cstat-no" title="statement not covered" >return handleError(req, res, 500, err); </span>}</span>
+<span class="cstat-no" title="statement not covered" >                        socket.emit("Usertag","");</span>
+<span class="cstat-no" title="statement not covered" >                        res.status(201);</span>
+<span class="cstat-no" title="statement not covered" >                        res.json({ msg: "User tagged"});</span>
+                    });
+                }else {
+<span class="cstat-no" title="statement not covered" >                    return handleError(req, res, 500, "waypoint bestaat niet");</span>
+                }
+            });
+        } else {
+<span class="cstat-no" title="statement not covered" >            return handleError(req, res, 500, "User bestaat niet");</span>
+        }
+    });
+}
+&nbsp;
+// Routing
+router.route('/')
+    .get(getWayPoint);
+&nbsp;
+router.route('/:id')
+    .get(getWayPoint);
+router.route('/:id/user')
+    .post(tagWaypoint);
+// Export
+module.exports = function (mongoose, errCallback){
+    console.log('Initializing wayPoints routing module');
+    race = mongoose.model('race');
+    user = mongoose.model('User');
+    wayPoint = mongoose.model('wayPoint');
+    handleError = errCallback;
+    return router;
+};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 23 2016 11:19:44 GMT+0100 (West-Europa (standaardtijd))
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

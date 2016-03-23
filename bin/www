@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../app')(null);
 var debug = require('debug')('webs5:server');
 var http = require('http');
 
@@ -20,6 +20,11 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+/*Eigen code*/
+var io = require("../socket/socket")(server);
+
+/*Einde eigen code*/
 
 /**
  * Listen on provided port, on all network interfaces.
