@@ -9,9 +9,10 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
-var morgan       = require('morgan');
-var session      = require('express-session');
-
+var morgan   = require('morgan');
+var session  = require('express-session');
+//todo alles omzetten naar repo structuur
+//todo zorgen voor 50% code covres bij testen
 module.exports =function(config){
 
   if(config){
@@ -21,95 +22,103 @@ module.exports =function(config){
     configDB = require('./config/database.js');
   }
 
-//uncommend als de auth word geimplementeerd
-//require('./config/passport')(passport); // pass passport for configuration
-// configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+  //uncommend als de auth word geimplementeerd
+  require('./config/passport')(passport); // pass passport for configuration
+  // configuration ===============================================================
+  mongoose.connect(configDB.url); // connect to our database
 
-// Models
-require('./models/user')(mongoose);
-require('./models/race')(mongoose);
-require('./models/wayPoint')(mongoose);
+  // Models
+  require('./models/user');
+  require('./models/race')(mongoose);
+  require('./models/wayPoint')(mongoose);
 
-function handleError(req, res, statusCode, message){
-  console.log();
-  console.log('-------- Error handled --------');
-  console.log('Request Params: ' + JSON.stringify(req.params));
-  console.log('Request Body: ' + JSON.stringify(req.body));
-  console.log('Response sent: Statuscode ' + statusCode + ', Message "' + message + '"');
-  console.log('-------- /Error handled --------');
-  res.status(statusCode);
-  res.json(message);
-};
+  function handleError(req, res, statusCode, message){
+    console.log();
+    console.log('-------- Error handled --------');
+    console.log('Request Params: ' + JSON.stringify(req.params));
+    console.log('Request Body: ' + JSON.stringify(req.body));
+    console.log('Response sent: Statuscode ' + statusCode + ', Message "' + message + '"');
+    console.log('-------- /Error handled --------');
+    res.status(statusCode);
+    res.json(message);
+  };
+  // /Routes
 
-// Routes
-var routes = require('./routes/index');
-var users = require('./routes/users')(mongoose, handleError);
-var races = require('./routes/races')(mongoose, handleError);
-var wayPoints = require('./routes/wayPoints')(mongoose, handleError);
-// /Routes
+  var app = express();
 
-var app = express();
+  // view engine setup
+  app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'ejs');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+  // uncomment after placing your favicon in /public
+  //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+  app.use(logger('dev'));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(cookieParser());
+  app.use(express.static(path.join(__dirname, 'public')));
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+  // required for passport
+  app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+  app.use(passport.initialize());
+  app.use(passport.session()); // persistent login sessions
+  app.use(flash()); // use connect-flash for flash messages stored in session
 
-// required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+  // Route
+  var routes = require('./routes/routes');
+  var users = require('./routes/users')(mongoose, handleError);
+  var races = require('./routes/races')(mongoose, handleError);
+  var wayPoints = require('./routes/wayPoints')(mongoose, handleError);
 
+// route middleware to make sure a user is logged in
+  function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+      return next();
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/races', races);
-app.use('/waypoints', wayPoints);
+    // if they aren't redirect them to the home page
+    console.log("niet ingelogd");
+    if(req.headers.accept.indexOf("application/json") > -1){
+      res.json({msg : "U moet ingelogd zijn om deze actie te doen"});
+    } else {
+      res.redirect('/');
+    }
+  }
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+  console.log(isLoggedIn);
 
-// error handlers
+  app.use('/', routes);
+  app.use('/users',isLoggedIn, users);
+  app.use('/races',isLoggedIn, races);
+  app.use('/waypoints',isLoggedIn, wayPoints);
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
+  // catch 404 and forward to error handler
+  app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
+
+  // development error handler
+  // will print stacktrace
+  if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+      res.status(err.status || 500);
+      res.render('error', {
+        message: err.message,
+        error: err
+      });
+    });
+  }
+
+  // production error handler
+  // no stacktraces leaked to user
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
-      error: err
+      error: {}
     });
   });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
-
-// routes ======================================================================
-//require('./routes/routes.js')(app); // load our routes and pass in our app and fully configured passport
-
-
-   return app;
+  return app;
 };
-

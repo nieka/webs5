@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+    <title>Race overzicht</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src='https://cdn.socket.io/socket.io-1.4.5.js'></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigatie</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Kroegen bv</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/profile">Profiel <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/races">Races</a></li>
+                <li ><a href="/users">users</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <table id="racelist" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Plaats</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id="racelistTbody">
+
+                </tbody>
+            </table>
+        </div>
+        <div id="raceCrud" class="col-md-2">
+            <p id="addrace">
+            <h2 >Add race</h2>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <strong>Naam: </strong>
+                        </td>
+                        <td>
+                            <input id="inputNaam" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Plaats: </strong>
+                        </td>
+                        <td>
+                            <input id="inputPlaats" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><button id="addRace">Add race</button></td>
+                    </tr>
+                </table>
+            </form>
+            </p>
+            <p id="Editrace">
+            <h2 >Edit race</h2>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <strong>Naam: </strong>
+                        </td>
+                        <td>
+                            <input id="inputeditNaam" type="text" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Plaats: </strong>
+                        </td>
+                        <td>
+                            <input id="inputeditPlaats" type="text" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Status: </strong>
+                        </td>
+                        <td>
+                            <select id="raceStatus" name="Status">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><button id="EditRace">Edit race</button></td>
+                    </tr>
+                </table>
+            </form>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    /*De meegerekegen users als variable zetten*/
+    var races = <%- JSON.stringify(races) %>;
+    console.log(races);
+</script>
+<script src="/javascripts/race.js"></script>
+</body>
+</html>

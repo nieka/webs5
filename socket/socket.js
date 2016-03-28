@@ -10,9 +10,7 @@ function sendmsg(naam, msg){
     if(io){
         io.emit(naam, { message: msg });
     }
-
 }
-
 
 module.exports = function(http){
     console.log("socket.js file aangeroepen");

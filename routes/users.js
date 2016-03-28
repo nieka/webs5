@@ -1,9 +1,13 @@
 var express = require('express');
 var _ = require('underscore');
 var socket = require("../socket/socket")(null);
+var passport = require('passport');
 var router = express();
 var User;
 var handleError;
+
+//todo google signin implementeren
+
 function getUser(req, res){
   var query = {};
 
@@ -12,30 +16,43 @@ function getUser(req, res){
   }
 
   var result = User.find(query);
+  console.log("user find called");
   result.exec(function(err, data){
+    console.log("users found");
     if(err){ return handleError(req, res, 500, err); }
 
     // We hebben gezocht op id, dus we gaan geen array teruggeven.
     if(req.params.id){
       data = data[0];
     }
-    res.json(data);
+
+    console.log(req.headers.accept);
+    if(req.headers.accept.indexOf("application/json") > -1){
+      res.json(data);
+    } else {
+      res.render('useroverzicht.ejs', {users : data});
+    }
   });
 }
 
-function addUser(req, res){
-  console.log("add user aangeroepen");
-  var user = new User(req.body);
+function getUserPaged(req, res){
+  console.log("paged")
 
-  user.save(function(err, savedUser){
-    if(err){
-      return handleError(req, res, 500, err);
-    } else {
-      socket.sendmsg("userUpdate", "");
-      res.status(201);
-      res.send(savedUser);
-    }
-  });
+      User.find()
+      .limit(req.params.pagesize)
+      .skip(req.params.pagesize * req.params.pagenumber)
+      .exec(function(err, data) {
+        console.log(
+            'paged opgehaalt'
+        );
+        if(err){ return handleError(req, res, 500, err); }
+
+        if(req.headers.accept.indexOf("application/json") > -1){
+          res.json(data);
+        } else {
+          res.render('useroverzicht.ejs', {users : data});
+        }
+      });
 }
 
 function deleteUser(req, res){
@@ -57,17 +74,14 @@ function deleteUser(req, res){
     }
   });
 }
-
 function updateUser(req, res){
   User.findOne({ _id: req.params.id }, function (err, doc){
     if(err){ return handleError(req, res, 500, err); }
     var body = req.body;
-    doc.firstname = body.firstname;
-    doc.lastname = body.lastname;
-    doc.woonplaats = body.woonplaats;
-    doc.email = body.email;
+    doc.local.email = body.email;
+    doc.local.voornaam = body.voornaam;
+    doc.local.achternaam = body.achternaam;
 
-   // doc.visits.$inc();
     doc.save(function(err){
       if(err){ return handleError(req, res, 500, err); }
       socket.sendmsg("userUpdate", "");
@@ -76,16 +90,22 @@ function updateUser(req, res){
   });
 }
 
-
 /* Routing */
 router.route('/')
     .get(getUser)
-    .post(addUser);
+    .post(passport.authenticate('local-signup', {
+      successRedirect : '/profile', // redirect to the secure profile section
+      failureRedirect : '/signup', // redirect back to the signup page if there is an error
+      failureFlash : true // allow flash messages
+    }));
 
 router.route('/:id')
     .get(getUser)
     .put(updateUser)
     .delete(deleteUser);
+router.route('/:pagesize/:pagenumber')
+    .get(getUserPaged);
+
 
 module.exports = function (mongoose, errCallback){
   console.log('Initializing user routing module');
