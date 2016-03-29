@@ -67,7 +67,7 @@ function addRace(event){
             });
         }
     };
-    xhttp.open("GET", "http://nominatim.openstreetmap.org/search?q="+ newRace.plaats +"&format=xml&polygon=1&addressdetails=1", true);
+    xhttp.open("GET", "https://nominatim.openstreetmap.org/search?q="+ newRace.plaats +"&format=xml&polygon=1&addressdetails=1", true);
     xhttp.send();
 }
 
@@ -122,7 +122,7 @@ function saveEditRace(event){
             });
         }
     };
-    xhttp.open("GET", "http://nominatim.openstreetmap.org/search?q="+ editRace.plaats +"&format=xml&polygon=1&addressdetails=1", true);
+    xhttp.open("GET", "https://nominatim.openstreetmap.org/search?q="+ editRace.plaats +"&format=xml&polygon=1&addressdetails=1", true);
     xhttp.send();
 }
 
