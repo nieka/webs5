@@ -1,9 +1,6 @@
-/**
- * Created by niek on 22-3-2016.
- */
+var mongoose = require('mongoose');
 
-
-function init(mongoose){
+function init(){
     console.log('Iniializing race schema');
 
     var schema = mongoose.Schema,
@@ -28,4 +25,4 @@ function init(mongoose){
     mongoose.model("race",schema);
 }
 
-module.exports = init;
+module.exports = init();

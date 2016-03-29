@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">57.89% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>11/19</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">20% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>1/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">57.89% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>11/19</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -70,7 +70,43 @@
 25
 26
 27
-28</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -90,24 +126,67 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">&nbsp;
+<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">var mongoose = require('mongoose');
+var bcrypt   = require('bcrypt-nodejs');
 &nbsp;
-function init(mongoose){
+function init(){
     console.log('Iniializing user schema');
 &nbsp;
-    var user = new mongoose.Schema({
-            firstname: {type: String, required: true},
-            lastname: {type: String, required: true},
-            email: {type: String},
-            woonplaats: {type: String, required: true},
-            pokomons: [{type: String}]
+    var userSchema = new mongoose.Schema(
+        {
+            local            : {
+                email        : String,
+                password     : String,
+                voornaam     : String,
+                achternaam   : String
+            },
+            google           : {
+                id           : String,
+                token        : String,
+                email        : String,
+                name         : String
+            }
         },
         {
             toObject: {
@@ -117,20 +196,46 @@ function init(mongoose){
                 virtuals: true
             }
         });
-    user.virtual('fullname')
-        .get(function () {
-            return this.firstname + ' ' + this.lastname;
+    userSchema.virtual('fullname')
+        .get(<span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            if(this.local.email){</span>
+<span class="cstat-no" title="statement not covered" >                return this.local.voornaam + ' ' + this.local.achternaam;</span>
+            }else {
+<span class="cstat-no" title="statement not covered" >                return this.google.name;</span>
+            }
+&nbsp;
         });
-    mongoose.model("User",user);
+    userSchema.virtual('email')
+        .get(<span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            if(this.local.email){</span>
+<span class="cstat-no" title="statement not covered" >                return this.local.email;</span>
+            }else {
+<span class="cstat-no" title="statement not covered" >                return this.google.email;</span>
+            }
+&nbsp;
+        });
+&nbsp;
+    // methods ======================
+    // generating a hash
+    userSchema.methods.generateHash = <span class="fstat-no" title="function not covered" >function(password) {</span>
+<span class="cstat-no" title="statement not covered" >        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);</span>
+    };
+&nbsp;
+    // checking if password is valid
+    userSchema.methods.validPassword = <span class="fstat-no" title="function not covered" >function(password) {</span>
+<span class="cstat-no" title="statement not covered" >        return bcrypt.compareSync(password, this.local.password);</span>
+    };
+&nbsp;
+    return mongoose.model("User",userSchema);
 }
 &nbsp;
-module.exports = init;</pre></td></tr>
+module.exports = init();</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 23 2016 11:19:44 GMT+0100 (West-Europa (standaardtijd))
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 29 2016 10:26:40 GMT+0200 (West-Europa (zomertijd))
 </div>
 </div>
 <script src="../../prettify.js"></script>

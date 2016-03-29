@@ -29,16 +29,30 @@ function init(){
         });
     userSchema.virtual('fullname')
         .get(function () {
-            return this.local.voornaam + ' ' + this.local.achternaam;
+            if(this.local.email){
+                return this.local.voornaam + ' ' + this.local.achternaam;
+            }else {
+                return this.google.name;
+            }
+
+        });
+    userSchema.virtual('email')
+        .get(function () {
+            if(this.local.email){
+                return this.local.email;
+            }else {
+                return this.google.email;
+            }
+
         });
 
     // methods ======================
-// generating a hash
+    // generating a hash
     userSchema.methods.generateHash = function(password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     };
 
-// checking if password is valid
+    // checking if password is valid
     userSchema.methods.validPassword = function(password) {
         return bcrypt.compareSync(password, this.local.password);
     };

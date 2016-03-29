@@ -3,33 +3,48 @@
  */
 //todo Zorgen dat na en voor de test de database leeg gegooit word.
 var app = require('../app')(require("../config/testConfig.js"));
+var mongoose = require('mongoose');
 var request = require('supertest');
 var expect = require('chai').expect;
 var should = require('chai').should();
 
-var reqeustFunction= require("../models/testFunction")(request,app);
-
 var testuser ={
-    local: {
-        "password": "123456789",
-        "email": "annespruit@gmail.com",
-        "voornaam": "anne",
-        "achternaam": "spruit"
-    }
+    "password": "123456789",
+    "email": "annespruit@gmail.com",
+    "voornaam": "anne",
+    "achternaam": "spruit"
 };
 
-describe('Testing user route', function(){
+var reqeustFunction = reqeustFunction= require("../models/testFunction")(request,app, testuser.email, testuser.password);
+
+describe('Testing user crud', function(){
+
+    /*after(function(done){
+        User = mongoose.model('User');
+        User.remove({}, function(err) {
+            console.log('collection removed');
+            done();
+        });
+    });*/
+
     it('Add user with user object', function(done){
-        reqeustFunction.makePostRequest('/users',testuser, 201, function(err, res){
+        reqeustFunction.makePostRequest('/signup',testuser, 302, function(err, res){
             if(err){
                 return done(err); }
-
-            expect(res.body.local.voornaam).to.equal(testuser.local.voornaam);
-            expect(res.body.local.achternaam).to.equal(testuser.local.achternaam);
-            expect(res.body.email).to.equal(testuser.email);
             done();
         });
     });
+    /*it('inloggen', function(done){
+        var logingegevens ={
+            "email": testuser.email,
+            "password": testuser.password
+        };
+        reqeustFunction.makePostRequest('/login',logingegevens, 302, function(err, res){
+            if(err){
+                return done(err); }
+            done();
+        });
+    });*/
     it('Get users', function(done){
         //zou de gebruiker die net is toegevoegd ophalen
         reqeustFunction.makeGetRequest('/users', 200, function(err, res){

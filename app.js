@@ -11,7 +11,6 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var morgan   = require('morgan');
 var session  = require('express-session');
-//todo alles omzetten naar repo structuur
 //todo zorgen voor 50% code covres bij testen
 module.exports =function(config){
 
@@ -29,20 +28,8 @@ module.exports =function(config){
 
   // Models
   require('./models/user');
-  require('./models/race')(mongoose);
-  require('./models/wayPoint')(mongoose);
-
-  function handleError(req, res, statusCode, message){
-    console.log();
-    console.log('-------- Error handled --------');
-    console.log('Request Params: ' + JSON.stringify(req.params));
-    console.log('Request Body: ' + JSON.stringify(req.body));
-    console.log('Response sent: Statuscode ' + statusCode + ', Message "' + message + '"');
-    console.log('-------- /Error handled --------');
-    res.status(statusCode);
-    res.json(message);
-  };
-  // /Routes
+  require('./models/race');
+  require('./models/wayPoint');
 
   var app = express();
 
@@ -66,9 +53,9 @@ module.exports =function(config){
 
   // Route
   var routes = require('./routes/routes');
-  var users = require('./routes/users')(mongoose, handleError);
-  var races = require('./routes/races')(mongoose, handleError);
-  var wayPoints = require('./routes/wayPoints')(mongoose, handleError);
+  var users = require('./routes/users');
+  var races = require('./routes/races');
+  var wayPoints = require('./routes/wayPoints');
 
 // route middleware to make sure a user is logged in
   function isLoggedIn(req, res, next) {
@@ -85,12 +72,21 @@ module.exports =function(config){
     }
   }
 
-  console.log(isLoggedIn);
-
   app.use('/', routes);
   app.use('/users',isLoggedIn, users);
   app.use('/races',isLoggedIn, races);
   app.use('/waypoints',isLoggedIn, wayPoints);
+
+  //Dit is mijn middelware voor error handeling vanuit de routes
+  app.use(function(err, req, res, next) {
+    if(!err){ next(); }
+    res.status = 403;
+    var msg = {
+      msg: "Oops somethign went wrong",
+      err: err
+    };
+    res.json(msg);
+  });
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {

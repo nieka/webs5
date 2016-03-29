@@ -1,9 +1,6 @@
-/**
- * Created by niek on 22-3-2016.
- */
+var mongoose = require('mongoose');
 
-
-function init(mongoose){
+function init(){
     console.log('Iniializing wayPoint schema');
     var schema = mongoose.Schema,
         ObjectId = schema.ObjectId;
@@ -23,4 +20,4 @@ function init(mongoose){
     mongoose.model("wayPoint",schema);
 }
 
-module.exports = init;
+module.exports = init();
