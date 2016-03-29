@@ -11,7 +11,6 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var morgan   = require('morgan');
 var session  = require('express-session');
-//todo zorgen voor 50% code covres bij testen
 module.exports =function(config){
 
   if(config){
@@ -24,8 +23,10 @@ module.exports =function(config){
   //uncommend als de auth word geimplementeerd
   require('./config/passport')(passport); // pass passport for configuration
   // configuration ===============================================================
-  mongoose.connect(configDB.url); // connect to our database
-
+  console.log("mongoose.connection.readyState " + mongoose.connection.readyState);
+  if(mongoose.connection.readyState === 0){
+    mongoose.connect(configDB.url);
+  }
   // Models
   require('./models/user');
   require('./models/race');

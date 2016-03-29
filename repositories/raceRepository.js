@@ -21,15 +21,12 @@ function getRace(req, res){
         query._id = req.params.id;
     }
     if(req.query.n){
-        console.log(req.query.n);
         query.naam = req.query.n;
     }
     if(req.query.p){
-        console.log(req.query.p);
         query.plaats = req.query.p;
     }
     if(req.query.s){
-        console.log(req.query.s);
         query.status = req.query.s;
     }
 
@@ -37,7 +34,6 @@ function getRace(req, res){
     result.exec(function(err, data){
         if(err){  return next(err); }
         if(req.params.id){
-            console.log("return single race");
             data = data[0];
             if(req.headers.accept.indexOf("application/json") > -1){
                 res.json(data);
@@ -51,9 +47,6 @@ function getRace(req, res){
                 res.render('raceoverzicht.ejs', {races: data});
             }
         }
-
-        console.log(req.headers.accept);
-
     });
 }
 
@@ -63,9 +56,6 @@ function getRacePaged(req, res, next){
         .limit(req.params.pagesize)
         .skip(req.params.pagesize * req.params.pagenumber)
         .exec(function(err, data) {
-            console.log(
-                'paged opgehaalt'
-            );
             if(err){  return next(err); }
 
             if(req.headers.accept.indexOf("application/json") > -1){
@@ -199,7 +189,6 @@ function deleteWaypoint(req, res, next){
             if(err){  return next(err); }
             waypoint.remove({ _id : req.params.waypointId }, function(err, removed) {
                 if(err){  return next(err); }
-                console.log("waypoint verwijderd");
                 var raceWaypoints = data[0].wayPoints;
                 var index = raceWaypoints.indexOf(req.params.waypointId);
                 if (index > -1) {
@@ -241,7 +230,7 @@ function addUser(req, res, next){
                         race.update(query, { $set: { deelnemers: raceUsers }}, options, function(err, numAffected){
                             if(err){  return next(err); }
                             socket.sendmsg("usUpdate", req.params.id);
-                            res.status(204);
+                            res.status(200);
                             res.json({ msg: "User toegevoegd"});
                         });
                     }else {
@@ -268,7 +257,7 @@ function getUsers(req, res, next){
         .populate('deelnemers')
         .exec(function (err, story) {
             if (err)  return next(err);
-            res.status(201);
+            res.status(200);
             res.json(story);
         });
 }
@@ -293,7 +282,7 @@ function deleteUser(req, res, next){
             race.update(query, { $set: { deelnemers: raceUsers }}, options, function(err, numAffected){
                 if(err){  return next(err); }
                 socket.sendmsg("usUpdate", req.params.id);
-                res.status(201);
+                res.status(204);
                 res.json({ msg: "User verwijderd"});
             });
         } else {

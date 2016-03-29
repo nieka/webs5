@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for webs5\repositories\userRepository.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">webs5/repositories/</a> userRepository.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">81.13% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>43/53</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">59.09% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>13/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>10/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">91.49% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>43/47</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Created by niek on 29-3-2016.
+ */
+var socket = require("../socket/socket")(null);
+var passport = require('passport');
+var User = require('mongoose').model('User');
+&nbsp;
+function getUser(req, res){
+    var query = {};
+&nbsp;
+    if(req.params.id){
+        query._id = req.params.id;
+    }
+&nbsp;
+    var result = User.find(query);
+    result.exec(function(err, data){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(err){ <span class="cstat-no" title="statement not covered" >return next(err); </span>}
+&nbsp;
+        // We hebben gezocht op id, dus we gaan geen array teruggeven.
+        if(req.params.id){
+            data = data[0];
+        }
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(req.headers.accept.indexOf("application/json") &gt; -1){
+            res.json(data);
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.render('useroverzicht.ejs', {users : data});</span>
+        }
+    });
+}
+&nbsp;
+function getUserPaged(req, res){
+    User.find()
+        .limit(req.params.pagesize)
+        .skip(req.params.pagesize * req.params.pagenumber)
+        .exec(function(err, data) {
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(err){ <span class="cstat-no" title="statement not covered" >return next(err); </span>}
+&nbsp;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(req.headers.accept.indexOf("application/json") &gt; -1){
+                res.json(data);
+            } else {
+<span class="cstat-no" title="statement not covered" >                res.render('useroverzicht.ejs', {users : data});</span>
+            }
+        });
+}
+&nbsp;
+function deleteUser(req, res){
+    var query = {};
+    query._id = req.params.id;
+&nbsp;
+    var result = User.find(query);
+    result.exec(function(err, data){
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(data){
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(err){ <span class="cstat-no" title="statement not covered" >return next(err); </span>}
+            User.remove({ _id : req.params.id }, function(err, removed) {
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(err){ <span class="cstat-no" title="statement not covered" >return next(err); </span>}
+                socket.sendmsg("userUpdate", "");
+                res.status(202);
+                res.json({"msg" : "User is verwijdert"});
+            });
+        } else {
+<span class="cstat-no" title="statement not covered" >            res.status(304);</span>
+<span class="cstat-no" title="statement not covered" >            res.json({"msg" : "User bestaat niet"});</span>
+        }
+    });
+}
+function updateUser(req, res, next){
+    User.findOne({ _id: req.params.id }, function (err, doc){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(err){ <span class="cstat-no" title="statement not covered" >return next(err); </span>}
+        var body = req.body;
+        doc.local.email = body.email;
+        doc.local.voornaam = body.voornaam;
+        doc.local.achternaam = body.achternaam;
+&nbsp;
+        doc.save(function(err){
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(err){ <span class="cstat-no" title="statement not covered" >return next(err); </span>}
+            socket.sendmsg("userUpdate", "");
+            res.json(doc);
+        });
+    });
+}
+&nbsp;
+module.exports = {
+    getUser : getUser,
+    getUserPaged : getUserPaged,
+    updateUser : updateUser,
+    deleteUser : deleteUser
+};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 29 2016 14:49:12 GMT+0200 (West-Europa (zomertijd))
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

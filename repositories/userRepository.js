@@ -13,9 +13,7 @@ function getUser(req, res){
     }
 
     var result = User.find(query);
-    console.log("user find called");
     result.exec(function(err, data){
-        console.log("users found");
         if(err){ return next(err); }
 
         // We hebben gezocht op id, dus we gaan geen array teruggeven.
@@ -23,7 +21,6 @@ function getUser(req, res){
             data = data[0];
         }
 
-        console.log(req.headers.accept);
         if(req.headers.accept.indexOf("application/json") > -1){
             res.json(data);
         } else {
@@ -37,9 +34,6 @@ function getUserPaged(req, res){
         .limit(req.params.pagesize)
         .skip(req.params.pagesize * req.params.pagenumber)
         .exec(function(err, data) {
-            console.log(
-                'paged opgehaalt'
-            );
             if(err){ return next(err); }
 
             if(req.headers.accept.indexOf("application/json") > -1){
@@ -61,7 +55,7 @@ function deleteUser(req, res){
             User.remove({ _id : req.params.id }, function(err, removed) {
                 if(err){ return next(err); }
                 socket.sendmsg("userUpdate", "");
-                res.status(200);
+                res.status(202);
                 res.json({"msg" : "User is verwijdert"});
             });
         } else {
