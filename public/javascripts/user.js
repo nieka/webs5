@@ -71,7 +71,8 @@ function editUser(){
     $("#inputeditEmail").val(user.local.email);
 }
 
-function saveEditUser(){
+function saveEditUser(event){
+    event.preventDefault();
     // If it is, compile all user info into one object
     var newUser = {
         "voornaam": $("#inputeditFirstname").val(),
@@ -123,5 +124,5 @@ function deleteUser(){
 /*socket methodes*/
 socket.on('userUpdate', function(msg){
     console.log("userUpdate socket");
-  //  loadUsers();
+    loadUsers();
 });

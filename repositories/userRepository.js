@@ -7,12 +7,23 @@ var User = require('mongoose').model('User');
 
 function getUser(req, res){
     var query = {};
-
+    var limit = 2;
+    var offset = 0;
+//todo zorgen dat paging hier word ingezet implaats van aparte methode
     if(req.params.id){
         query._id = req.params.id;
     }
+    if(req.query.limit){
+        limit = req.query.limit;
+    }
+    if(req.query.offset){
+        offset = req.query.offset;
+    }
 
-    var result = User.find(query);
+    var result = User
+        .find(query)
+        .limit(limit)
+        .skip(offset);
     result.exec(function(err, data){
         if(err){ return next(err); }
 
@@ -28,22 +39,6 @@ function getUser(req, res){
         }
     });
 }
-
-function getUserPaged(req, res){
-    User.find()
-        .limit(req.params.pagesize)
-        .skip(req.params.pagesize * req.params.pagenumber)
-        .exec(function(err, data) {
-            if(err){ return next(err); }
-
-            if(req.headers.accept.indexOf("application/json") > -1){
-                res.json(data);
-            } else {
-                res.render('useroverzicht.ejs', {users : data});
-            }
-        });
-}
-
 function deleteUser(req, res){
     var query = {};
     query._id = req.params.id;
@@ -82,7 +77,6 @@ function updateUser(req, res, next){
 
 module.exports = {
     getUser : getUser,
-    getUserPaged : getUserPaged,
     updateUser : updateUser,
     deleteUser : deleteUser
 };

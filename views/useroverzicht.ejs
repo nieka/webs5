@@ -67,37 +67,19 @@
             <p id="edituser">
             <h2 >Edit user</h2>
             <form>
-                <table>
-                    <tr>
-                        <td>
-                            <strong>Voornaam: </strong>
-                        </td>
-                        <td>
-                            <input id="inputeditFirstname" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Achternaam: </strong>
-                        </td>
-                        <td>
-                            <input id="inputeditLastname" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Email: </strong>
-                        </td>
-                        <td>
-                            <input id="inputeditEmail" type="email">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><button id="editUser">Edit User</button></td>
-                        <td></td>
-                    </tr>
-                </table>
-
+                <div class="form-group">
+                    <label>Voornaam</label>
+                    <input id="inputeditFirstname" class="form-control" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Achternaam</label>
+                    <input id="inputeditLastname" class="form-control" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input id="inputeditEmail" class="form-control" type="text" required>
+                </div>
+                <button id="editUser" class="btn btn-warning btn-lg">Edit</button>
             </form>
             </p>
         </div>

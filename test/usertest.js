@@ -128,14 +128,14 @@ describe('Testing user paging', function(){
     });
 
     it('get user paging met 4 per page page 0', function(done){
-        reqeustFunction.makeGetRequest('/users/4/0',200, function(err, res){
+        reqeustFunction.makeGetRequest('/users/?limit=4&offset=0',200, function(err, res){
             if(err){return done(err); }
             expect(res.body.length).to.equal(4);
             done();
         });
     });
     it('get user paging met 4 per page page 1', function(done){
-        reqeustFunction.makeGetRequest('/users/4/1',200, function(err, res){
+        reqeustFunction.makeGetRequest('/users/?limit=4&offset=4',200, function(err, res){
             if(err){return done(err); }
             expect(res.body.length).to.equal(2);
             done();

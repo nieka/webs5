@@ -108,7 +108,7 @@ function loadUsers(){
             $("#aanmelden").empty();
         }else {
             $("#aanmelden").empty();
-            $("#aanmelden").append('<button id="aanmeldenRace">Aanmelden bij race</button>');
+            $("#aanmelden").append('<button id="aanmeldenRace" class="btn btn-warning btn-lg">Aanmelden bij race</button>');
         }
     });
 }

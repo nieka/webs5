@@ -10,7 +10,5 @@ router.route('/:id')
     .get(userRepo.getUser)
     .put(userRepo.updateUser)
     .delete(userRepo.deleteUser);
-router.route('/:pagesize/:pagenumber')
-    .get(userRepo.getUserPaged);
 
 module.exports = router;

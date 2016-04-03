@@ -42,7 +42,7 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <table id="racelist" class="table table-striped">
                 <thead>
                 <tr>
@@ -56,66 +56,38 @@
                 </tbody>
             </table>
         </div>
-        <div id="raceCrud" class="col-md-2">
+        <div id="raceCrud" class="col-md-3">
             <p id="addrace">
-            <h2 >Add race</h2>
+            <h3 >Add race</h3>
             <form>
-                <table>
-                    <tr>
-                        <td>
-                            <strong>Naam: </strong>
-                        </td>
-                        <td>
-                            <input id="inputNaam" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Plaats: </strong>
-                        </td>
-                        <td>
-                            <input id="inputPlaats" type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><button id="addRace">Add race</button></td>
-                    </tr>
-                </table>
+                <div class="form-group">
+                    <label>Naam</label>
+                    <input id="inputNaam" class="form-control" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Plaats</label>
+                    <input id="inputPlaats" class="form-control" type="text" required>
+                </div>
+                <button id="addRace" class="btn btn-warning btn-lg">Add</button>
             </form>
             </p>
             <p id="Editrace">
             <h2 >Edit race</h2>
             <form>
-                <table>
-                    <tr>
-                        <td>
-                            <strong>Naam: </strong>
-                        </td>
-                        <td>
-                            <input id="inputeditNaam" type="text" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Plaats: </strong>
-                        </td>
-                        <td>
-                            <input id="inputeditPlaats" type="text" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Status: </strong>
-                        </td>
-                        <td>
-                            <select id="raceStatus" name="Status">
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><button id="EditRace">Edit race</button></td>
-                    </tr>
-                </table>
+                <div class="form-group">
+                    <label>Naam</label>
+                    <input id="inputeditNaam" class="form-control" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Plaats</label>
+                    <input id="inputeditPlaats" class="form-control" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="raceStatus" class="form-control" name="Status">
+                    </select>
+                </div>
+                <button id="EditRace" class="btn btn-warning btn-lg">Edit</button>
             </form>
             </p>
         </div>

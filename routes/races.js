@@ -24,7 +24,5 @@ router.route('/:id/user')
     .get(raceRepo.getUsers);
 router.route('/:id/user/:userId')
     .delete(raceRepo.deleteUser);
-router.route('/:pagesize/:pagenumber')
-    .get(raceRepo.getRacePaged);
 
 module.exports = router;

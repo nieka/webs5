@@ -140,14 +140,14 @@ describe('Testing race paging', function(){
     });
 
     it('get race paging met 4 per page page 0', function(done){
-        reqeustFunction.makeGetRequest('/races/4/0',200, function(err, res){
+        reqeustFunction.makeGetRequest('/races/?limit=4&offset=0',200, function(err, res){
             if(err){return done(err); }
             expect(res.body.length).to.equal(4);
             done();
         });
     });
     it('get race paging met 4 per page page 1', function(done){
-        reqeustFunction.makeGetRequest('/races/4/1',200, function(err, res){
+        reqeustFunction.makeGetRequest('/races/?limit=4&offset=4',200, function(err, res){
             if(err){return done(err); }
             expect(res.body.length).to.equal(4);
             done();

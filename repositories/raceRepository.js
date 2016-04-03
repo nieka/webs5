@@ -6,7 +6,7 @@ var request = require('request');
 var waypoint= require('mongoose').model('wayPoint');
 var race = require('mongoose').model('race');
 var user = require('mongoose').model('User');
-
+//todo set content header
 /*
  *qeury leter betekenis
  * i = id
@@ -16,9 +16,16 @@ var user = require('mongoose').model('User');
  * */
 function getRace(req, res){
     var query = {};
-
+    var limit = 20;
+    var offset = 0;
     if(req.params.id){
         query._id = req.params.id;
+    }
+    if(req.query.limit){
+        limit = req.query.limit;
+    }
+    if(req.query.offset){
+        offset = req.query.offset;
     }
     if(req.query.n){
         query.naam = req.query.n;
@@ -30,7 +37,10 @@ function getRace(req, res){
         query.status = req.query.s;
     }
 
-    var result = race.find(query);
+    var result = race
+        .find(query)
+        .limit(limit)
+        .skip(offset);
     result.exec(function(err, data){
         if(err){  return next(err); }
         if(req.params.id){
