@@ -48,7 +48,7 @@ function getRace(req, res){
             if(req.headers.accept.indexOf("application/json") > -1){
                 res.json(data);
             } else {
-                res.render('singleraceView.ejs', {race: data, user_id : req.user._id});
+                res.render('singleraceview.ejs', {race: data, user_id : req.user._id});
             }
         } else {
             if(req.headers.accept.indexOf("application/json") > -1){
